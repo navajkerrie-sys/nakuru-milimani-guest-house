@@ -469,6 +469,45 @@
     color: #ffdf6b !important;
     opacity: 1 !important;
   }
+  html, body {
+    overflow-x: hidden !important;
+    max-width: 100vw !important;
+    position: relative;
+  }
+  img {
+    max-width: 100% !important;
+    height: auto !important;
+  
+  @media (max-width: 768px) {
+    .hero {
+      display: flex !important;
+      flex-direction: column !important;
+    }
+    .hero-copy, .hero-figure {
+      width: 100% !important;
+      max-width: 100% !important;
+    }
+
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+    scroll-snap-type: x mandatory !important;
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    gap: 16px !important;
+    padding: 0 20px 20px 20px !important;
+    width: 100vw !important;
+    margin-left:-20px !important;
+  }
+    min-width: 280px !important;
+    width: 82vw !important;
+    flex-shrink: 0 !important;
+    scroll-snap-align: start !important;
+  }
+  section[style*="overflow-x:auto"]{
+    overflow-x: auto !important;
+   }
+  }
 </style>
 </head>
 <body>
