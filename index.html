@@ -515,6 +515,15 @@
     0% { left: -100%; }
     50%, 100% { left: 100%; }
   }
+  .modal h3 {
+    color: #FFD700 !important;
+    text-shadow: 0 1px 0 #8a6d1b, 0 0 10px rgba(212,175,55,0.35) !important;
+  }
+  .modal .sub,
+  .modal label,
+  .modal .field label {
+    color: #0f1938 !important;
+  }
 </style>
 </head>
 <body>
@@ -884,6 +893,20 @@
             <option>1 guest</option>
             <option selected>2 guests</option>
             <option>3 guests</option>
+            <option>4 guests</option>
+            <option>5 guests</options>
+            <option>6 guests</option>
+          </select>
+        </div>
+        <div class="field" id="f-kids">
+          <label for="kids">Kids (Under 12)</label>
+          <select id="kids">
+            <option selected>0 kids</option>
+            <option>1 kid</option>
+            <option>2 kids</option>
+            <option>3 kids</option>
+            <option>4 kids</option>
+            <option>5 kids</option>
           </select>
         </div>
         <div class="field" id="f-name">
@@ -980,6 +1003,25 @@ function closeBooking(){
   var o = document.getElementById('bookingOverlay');
   if(o) o.style.display = 'none';
 }
+  function submitBooking(e){
+  if(e) e.preventDefault();
+
+  var checkin = document.getElementById('checkin')?.value || "";
+  var checkout = document.getElementById('checkout')?.value || "";
+  var guests = document.getElementById('guests')?.value || "";
+  var kids = document.getElementById('kids')?.value || "";
+  var name = document.getElementById('guestName')?.value || "";
+  var email = document.getElementById('guestEmail')?.value || "";
+  var roomTitle = document.getElementById('bookingSub')?.innerText || "The Baobab Exclusive Loft";
+
+  var yourEmail = "kerriejavan33@gmail.com";
+  var subject = "NEW BOOKING: " + roomTitle + " - " + name;
+  var body = "Suite: " + roomTitle + "\nCheck-in: " + checkin + "\nCheck-out: " + checkout + "\nAdults: " + guests + "\nKids: " + kids + "\n\nName: " + name + "\nEmail: " + email;
+
+  window.open("https://mail.google.com/mail/?view=cm&fs=1&to=" + yourEmail + "&su=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body), "_blank");
+  
+  closeBooking();
+  return false;
 
   function clearErrors(formId){
     var form = document.getElementById(formId);
@@ -991,30 +1033,6 @@ function closeBooking(){
   }
   function clearError(fieldId){
     document.getElementById(fieldId).classList.remove('has-error');
-  }
-
-  function submitBooking(e){
-    e.preventDefault();
-    var checkin = document.getElementById('checkin').value;
-    var checkout = document.getElementById('checkout').value;
-    var name = document.getElementById('guestName').value.trim();
-    var email = document.getElementById('guestEmail').value.trim();
-    var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    var valid = true;
-
-    if(!checkin){ markError('f-checkin'); valid = false; } else { clearError('f-checkin'); }
-    if(!checkout || (checkin && checkout <= checkin)){ markError('f-checkout'); valid = false; } else { clearError('f-checkout'); }
-    if(!name){ markError('f-name'); valid = false; } else { clearError('f-name'); }
-    if(!email || !emailPattern.test(email)){ markError('f-email'); valid = false; } else { clearError('f-email'); }
-
-    if(!valid) return false;
-
-    var guests = document.getElementById('guests').value;
-    document.getElementById('confirmDetail').textContent =
-      selectedRoom + ', ' + checkin + ' to ' + checkout + ', ' + guests + '. We will email ' + email + ' to confirm.';
-    document.getElementById('bookingFormWrap').style.display = 'none';
-    document.getElementById('bookingConfirm').classList.add('show');
-    return false;
   }
 
   function openMemberForm(){
