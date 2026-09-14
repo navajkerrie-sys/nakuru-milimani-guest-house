@@ -524,6 +524,22 @@
   .modal .field label {
     color: #0f1938 !important;
   }
+  .field-dark input,
+  .field-dark textarea {
+    color: #fff !important;
+    -webkit-text-fill-color: #fff !important;
+    background: #1a1a1a !important;
+    border: 1px solid #333 !important;
+    caret-color: #fff !important;
+  }
+  .field-dark input:-webkit-autofill,
+  .field-dark textarea:-webkit-autofill,
+  .field-dark input:-webkit-autofill:hover,
+  .field-dark input:-webkit-autofill:focus {
+    -webkit-text-fill-color: #fff !important;
+    -webkit-box-shadow: 0 0 0px 1000px #1a1a1a inset !important;
+    transition: background-color 5000s ease-in-out 0s !important;
+  }
 </style>
 </head>
 <body>
